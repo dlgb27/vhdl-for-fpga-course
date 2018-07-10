@@ -13,12 +13,14 @@ end entity;
 
 architecture rlt of async_logic is
 
-  signal a : std_logic_vector(15 downto 0);
+  signal a : std_logic;
   signal b : std_logic;
 
 begin
 
-  a       <= not switches;
-  leds(0) <= a(0) xor a(1);
+  a <= (not switches(0)) and switches(1);
+  b <= (not switches(2)) and switches(3);
+
+  leds(0) <= a or b;
 
 end architecture;
