@@ -2,7 +2,7 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-entity flip_flop is
+entity toplevel is
   port
   (
     clk       : in std_logic;
@@ -15,7 +15,7 @@ entity flip_flop is
   );
 end entity;
 
-architecture rlt of flip_flop is
+architecture rlt of toplevel is
 
   signal reset            : std_logic;
   signal d, q_r, q_rr     : std_logic;

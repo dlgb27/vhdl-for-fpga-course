@@ -27,7 +27,7 @@ begin
   d       <= switches(0);
   leds(0) <= q_r;
 
-  flip_flop : process(clk) is
+  flip_flop_proc : process(clk) is
   begin
     if rising_edge(clk) then
       if (reset = '1') then

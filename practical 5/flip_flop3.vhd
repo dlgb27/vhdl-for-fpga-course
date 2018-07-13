@@ -26,7 +26,7 @@ begin
   d       <= switches(0);
   leds(0) <= q_r;
 
-  flip_flop : process(clk, reset) is
+  flip_flop_proc : process(clk, reset) is
   begin
     if (reset = '1') then
       q_r <= '0';
