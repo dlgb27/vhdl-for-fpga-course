@@ -16,7 +16,7 @@ end entity;
 architecture rlt of flip_flop is
 
   signal set, reset, clk  : std_logic;
-  signal d, q             : std_logic;
+  signal d, q_r           : std_logic;
 
 begin
 
@@ -25,18 +25,18 @@ begin
   clk     <= buttons(2);
 
   d       <= switches(0);
-  leds(0) <= q;
+  leds(0) <= q_r;
 
   flip_flop : process(clk) is
   begin
     if rising_edge(clk) then
-      q <= d;
+      q_r <= d;
 
       if (set = '1') then
-        q <= '1';
+        q_r <= '1';
       end if;
       if (reset = '1') then
-        q <= '0';
+        q_r <= '0';
       end if;
     end if;
   end process;
