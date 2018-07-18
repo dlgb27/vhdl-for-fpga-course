@@ -32,7 +32,7 @@ begin
     a_in        => switches(7 downto 0),
     b_in        => switches(15 downto 8),
     --
-    result_out  => leds(8 downto 0)
+    result_out  => leds(7 downto 0)
   );
 
 end architecture;
