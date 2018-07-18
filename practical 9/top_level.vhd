@@ -19,7 +19,7 @@ architecture rlt of toplevel is
 
 begin
 
-  adder_inst : entity work.counter
+  counter_inst : entity work.counter
   generic map
   (
     bits        => 8
