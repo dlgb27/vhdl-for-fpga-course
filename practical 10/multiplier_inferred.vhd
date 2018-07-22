@@ -25,6 +25,9 @@ architecture rlt of multiplier is
 
   signal m_reg_r, p_reg_r       : std_logic_vector(2*bits-1 downto 0);
 
+  attribute use_dsp : string;
+  attribute use_dsp of m_reg_r : signal is "yes";
+
 begin
 
   dsp_proc : process(clk) is
@@ -36,7 +39,7 @@ begin
       b_reg1_r  <= b_in;
       b_reg2_r  <= b_reg1_r;
 
-      m_reg_r   <= std_logic_vector(unsigned(a_reg2_r) * unsigned(b_reg2_r));
+      m_reg_r   <= std_logic_vector(signed(a_reg2_r) * signed(b_reg2_r));
 
       p_reg_r   <= m_reg_r;
     end if;

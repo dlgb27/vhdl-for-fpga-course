@@ -20,8 +20,6 @@ architecture rlt of toplevel is
   signal reset            : std_logic;
   signal d, q_r, q_rr     : std_logic;
 
-  -- TODO: Does this need equivalent register removal off, or shift reg extract off?
-
 begin
 
   reset   <= buttons(0);

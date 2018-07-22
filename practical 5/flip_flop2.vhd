@@ -20,9 +20,9 @@ architecture rlt of flip_flop is
 
 begin
 
-  set     <= buttons(0);
+  clk     <= buttons(0);
   reset   <= buttons(1);
-  clk     <= buttons(2);
+  set     <= buttons(2);
 
   d       <= switches(0);
   leds(0) <= q_r;

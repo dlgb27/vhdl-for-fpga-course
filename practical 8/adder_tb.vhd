@@ -12,9 +12,8 @@ architecture rlt of adder_tb is
 
 
   signal clk            : std_logic;
-  signal reset          : std_logic;
 
-  signal a, b           : std_logic_vector(bits-1 downto 0);
+  signal a, b           : std_logic_vector(bits-1 downto 0) := (others => '0');
   signal result         : std_logic_vector(bits-1 downto 0);
 
 begin
@@ -32,7 +31,7 @@ begin
     if rising_edge(clk) then
       a <= std_logic_vector(unsigned(a) + 1);
 
-      if (a = (a'range => '0')) then
+      if (a = (a'range => '1')) then
         b <= std_logic_vector(unsigned(b) + 1);
       end if;
     end if;

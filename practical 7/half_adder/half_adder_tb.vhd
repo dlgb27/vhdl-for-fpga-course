@@ -10,6 +10,7 @@ architecture rlt of half_adder_tb is
   constant clk_period : time := 10 ns;
 
   signal clk            : std_logic;
+  signal clk_enable     : std_logic := '1';
   signal reset          : std_logic;
 
   signal a, b           : std_logic;
@@ -19,10 +20,14 @@ begin
 
   clk_process: process is
   begin
-    wait for clk_period/2;
-    clk <= '1';
-    wait for clk_period/2;
-    clk <= '0';
+    if (clk_enable = '1') then
+      wait for clk_period/2;
+      clk <= '1';
+      wait for clk_period/2;
+      clk <= '0';
+    else
+      wait;
+    end if;
   end process;
 
   stimulus_procsss: process is
@@ -55,7 +60,7 @@ begin
     a <= '1';
     b <= '1';
     wait until rising_edge(clk);
-    if ((result /= '1') or (carry /= '1')) then
+    if ((result /= '0') or (carry /= '1')) then
       fail := '1';
     end if;
     if (fail = '0') then
@@ -63,6 +68,7 @@ begin
     else
       report "Test failed!";
     end if;
+    clk_enable <= '0';
     wait;
   end process;
 
