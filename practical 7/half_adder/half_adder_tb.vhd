@@ -75,6 +75,8 @@ begin
   uut : entity work.half_adder
   port map 
   (
+    clk         => clk,
+    --
     a_in        => a,
     b_in        => b,
     --

@@ -107,6 +107,8 @@ begin
   uut : entity work.full_adder
   port map 
   (
+    clk         => clk,
+    --
     a_in        => a,
     b_in        => b,
     carry_in    => c,
