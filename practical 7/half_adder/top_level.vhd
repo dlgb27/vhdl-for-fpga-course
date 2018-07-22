@@ -23,6 +23,8 @@ begin
   half_adder_inst : entity work.half_adder
   port map 
   (
+    clk         => clk,
+    --
     a_in        => switches(0),
     b_in        => switches(1),
     --

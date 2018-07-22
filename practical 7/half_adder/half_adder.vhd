@@ -5,6 +5,8 @@ use ieee.numeric_std.all;
 entity half_adder is
   port
   (
+    clk         : in std_logic;
+    --
     a_in        : in std_logic;
     b_in        : in std_logic;
     --
@@ -17,7 +19,12 @@ architecture rlt of half_adder is
 
 begin
 
-  result_out  <= a_in xor b_in;
+  process(clk) is
+  begin
+    if rising_edge(clk) then
+      result_out  <= a_in xor b_in;
+    end if;
+  end process;
 
   carry_out   <= a_in and b_in;
 

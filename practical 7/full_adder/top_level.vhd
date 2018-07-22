@@ -20,9 +20,11 @@ architecture rlt of toplevel is
 
 begin
 
-  half_adder_inst : entity work.full_adder
+  full_adder_inst : entity work.full_adder
   port map 
   (
+    clk         => clk,
+    --
     a_in        => switches(0),
     b_in        => switches(1),
     carry_in    => switches(2),

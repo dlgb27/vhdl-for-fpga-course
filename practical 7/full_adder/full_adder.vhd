@@ -5,6 +5,8 @@ use ieee.numeric_std.all;
 entity full_adder is
   port
   (
+    clk         : in std_logic;
+    --
     a_in        : in std_logic;
     b_in        : in std_logic;
     carry_in    : in std_logic;
@@ -21,7 +23,13 @@ architecture rlt of full_adder is
 begin
 
   a_xor_b     <= a_in xor b_in;
-  result_out  <= a_xor_b xor carry_in;
+
+  process(clk) is
+  begin
+    if rising_edge(clk) then
+      result_out  <= a_xor_b xor carry_in;
+    end if;
+  end process;
 
   carry_out   <= ((a_in and b_in) or (a_xor_b and carry_in));
 
