@@ -5,11 +5,11 @@ use ieee.numeric_std.all;
 entity full_adder is
   port
   (
-    clk         : in std_logic;
+    clk         : in  std_logic;
     --
-    a_in        : in std_logic;
-    b_in        : in std_logic;
-    carry_in    : in std_logic;
+    a_in        : in  std_logic;
+    b_in        : in  std_logic;
+    carry_in    : in  std_logic;
     --
     result_out  : out std_logic;
     carry_out   : out std_logic

@@ -5,11 +5,11 @@ use ieee.numeric_std.all;
 entity toplevel is
   port
   (
-    clk       : in std_logic;
+    clk       : in  std_logic;
     --  
-    switches  : in std_logic_vector(15 downto 0);
+    switches  : in  std_logic_vector(15 downto 0);
     --
-    buttons   : in std_logic_vector(4 downto 0);
+    buttons   : in  std_logic_vector(4 downto 0);
     --
     leds      : out std_logic_vector(15 downto 0)
   );

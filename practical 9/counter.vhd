@@ -9,7 +9,7 @@ entity counter is
   );
   port
   (
-    clk         : in std_logic;
+    clk         : in  std_logic;
     --
     pulse_out   : out std_logic
   );

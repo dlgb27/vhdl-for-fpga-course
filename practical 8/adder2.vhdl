@@ -9,10 +9,10 @@ entity adder is
   );
   port
   (
-    clk         : in std_logic;
+    clk         : in  std_logic;
     --
-    a_in        : in std_logic_vector(bits-1 downto 0);
-    b_in        : in std_logic_vector(bits-1 downto 0);
+    a_in        : in  std_logic_vector(bits-1 downto 0);
+    b_in        : in  std_logic_vector(bits-1 downto 0);
     --
     result_out  : out std_logic_vector(bits downto 0)
   );

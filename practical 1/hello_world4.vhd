@@ -5,7 +5,7 @@ use ieee.numeric_std.all;
 entity hello_world is
   port
   (
-    switches  : in std_logic_vector(1 downto 0);
+    switches  : in  std_logic_vector(1 downto 0);
     --
     leds      : out std_logic_vector(1 downto 0)
   );

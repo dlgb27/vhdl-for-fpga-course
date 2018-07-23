@@ -5,8 +5,8 @@ use ieee.numeric_std.all;
 entity hello_world is
   port
   (
-    sw1   : in std_logic;
-    sw2   : in std_logic;
+    sw1   : in  std_logic;
+    sw2   : in  std_logic;
     --
     led1  : out std_logic;
     led2  : out std_logic

@@ -5,7 +5,7 @@ use ieee.numeric_std.all;
 entity rom is
   port
   (
-    clk       : in std_logic;
+    clk       : in  std_logic;
     --
     leds_out  : out std_logic_vector(15 downto 0)
   );
