@@ -15,14 +15,14 @@ end entity;
 
 architecture rlt of debounce is
 
-  signal sr   : std_logic_vector(2 downto 0) := (others => '0');
+  signal sr   : std_logic_vector(5 downto 0) := (others => '0');
 
 begin
 
   process(clk) is
   begin
     if rising_edge(clk) then
-      sr <= sr(1 downto 0) & bit_in;
+      sr <= sr(sr'high-1 downto 0) & bit_in;
     end if;
   end process;
 
