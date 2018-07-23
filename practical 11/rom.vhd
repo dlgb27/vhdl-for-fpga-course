@@ -15,6 +15,7 @@ architecture rlt of rom is
 
   constant rom_addr_bits    : natural := 4;
   constant rom_depth        : natural := 2**rom_addr_bits;
+  constant slow_down_bits   : natural := 24;
 
   type rom_t is array (0 to rom_depth-1) of std_logic_vector(leds_out'range);
 
@@ -42,7 +43,7 @@ architecture rlt of rom is
 
   signal rom                : rom_t := init_rom;
   signal rom_address_r      : std_logic_vector(rom_addr_bits-1 downto 0);
-  signal count_r            : std_logic_vector(rom_addr_bits+10-1 downto 0);
+  signal count_r            : std_logic_vector(rom_addr_bits+slow_down_bits-1 downto 0);
 
   attribute ram_style : string;
   attribute ram_style of rom : signal is "distributed";
