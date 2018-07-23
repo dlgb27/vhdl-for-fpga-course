@@ -29,12 +29,12 @@ begin
   (
     clk         => clk,
     --
-    d           => switches(7 downto 0),
-    wr_a        => switches(15 downto 8),
-    wr_en       => buttons(0),
+    d_in        => switches(7 downto 0),
+    wr_a_in     => switches(15 downto 8),
+    wr_en_in    => buttons(0),
     --
-    q           => leds(7 downto 0),
-    rd_a        => switches(15 downto 8)
+    q_out       => leds(7 downto 0),
+    rd_a_in     => switches(15 downto 8)
   );
 
 end architecture;
