@@ -16,3 +16,5 @@ A key tenet of the course is 'learning by doing', hence the practicals found her
 Below is a summary of the aims of each practical:
 
 ### Practical 1 - Hello World
+
+The minimum viable VHDL file. A switch controls an LED. Variations include multiple switches and LEDs with vector asignment and vector indexing.
