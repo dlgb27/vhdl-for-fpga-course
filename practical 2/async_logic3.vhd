@@ -2,13 +2,13 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
--- Implement the following logic funcion:
+-- Implement the following logic function:
 --
 -- (not a) and b and (d or ((not c) and (not d)))
 -- or
 -- (not c) and d and (b or (a and (not b)))
 --
--- where a,b,c,d are the bottom bits of swithces respectively.
+-- where a,b,c,d are the bottom bits of switches respectively.
 
 entity async_logic is
   port
