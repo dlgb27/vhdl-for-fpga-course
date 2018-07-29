@@ -2,6 +2,14 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
+-- A complex logic function: 
+--
+-- (not a) and b and (d or ((not c) and (not d)))
+-- or
+-- (not c) and d and (b or (a and (not b)))
+--
+-- implemented with a case statement.
+
 entity hello_process is
   port
   (

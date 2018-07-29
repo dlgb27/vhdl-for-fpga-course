@@ -2,6 +2,8 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
+-- A flip flop with an asynchronous reset.
+
 entity flip_flop is
   port
   (

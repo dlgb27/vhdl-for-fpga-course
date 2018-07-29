@@ -2,6 +2,8 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
+-- A generic bit adder composed of 1 bit full adder components.
+
 entity adder is
   generic
   (

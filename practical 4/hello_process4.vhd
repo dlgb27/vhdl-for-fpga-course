@@ -2,6 +2,8 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
+-- A simple synchronous process with a push-button clock.
+
 entity hello_process is
   port
   (

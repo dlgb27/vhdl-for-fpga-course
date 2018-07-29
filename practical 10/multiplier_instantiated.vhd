@@ -5,6 +5,8 @@ use ieee.numeric_std.all;
 Library UNISIM;
 use UNISIM.vcomponents.all;
 
+-- A multiplier using an instantiated DSP primitive.
+
 entity multiplier is
   generic
   (

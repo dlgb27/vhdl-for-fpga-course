@@ -2,6 +2,8 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
+-- A pulse generator using a counter and a N-bit AND function.
+
 entity counter is
   generic
   (

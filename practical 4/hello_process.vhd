@@ -2,6 +2,8 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
+-- Very simple example of an asynchronous process.
+
 entity hello_process is
   port
   (

@@ -2,6 +2,8 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
+-- A simple example of an if statement in an asynchronous process.
+
 entity hello_process is
   port
   (

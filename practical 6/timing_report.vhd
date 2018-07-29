@@ -2,6 +2,8 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
+-- A very simple example with two flip flops to provide a path that can be timing analysed.
+
 entity toplevel is
   port
   (
