@@ -6,7 +6,7 @@ use ieee.numeric_std.all;
 --
 -- (not a) and b and (d or ((not c) and (not d)))
 -- or
--- (not c) and d and (b or (a and (not b)))
+-- (not c) and d and (b or ((not a) and (not b)))
 --
 -- where a,b,c,d are the bottom bits of switches respectively.
 
@@ -34,7 +34,7 @@ begin
 
   x <= d or ((not c) and (not d));
 
-  y <= b or (a and (not b));
+  y <= b or ((not a) and (not b));
 
   i <= (not a) and b and x;
 
