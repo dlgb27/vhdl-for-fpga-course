@@ -6,7 +6,7 @@ use ieee.numeric_std.all;
 --
 -- (not a) and b and (d or ((not c) and (not d)))
 -- or
--- (not c) and d and (b or (a and (not b)))
+-- (not c) and d and (b or ((not a) and (not b)))
 --
 -- implemented using a with-select statement.
 
@@ -29,7 +29,7 @@ begin
                 '1' when "0111",
                 --'1' when "0101", -- Already covered this case
                 '1' when "1101",
-                '1' when "1001",
+                '1' when "0001",
                 '0' when others;
 
 
