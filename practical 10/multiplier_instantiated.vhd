@@ -30,6 +30,8 @@ architecture rlt of multiplier is
   signal p      : std_logic_vector(47 downto 0);
 
 begin
+
+  assert (bits <= 18) report "Can't have more than 18 bits into DSP slice." severity ERROR;
   
   a(29 downto bits)   <= (others => '0');
   a(bits-1 downto 0)  <= a_in;
