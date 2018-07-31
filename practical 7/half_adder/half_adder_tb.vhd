@@ -30,7 +30,7 @@ begin
     end if;
   end process;
 
-  stimulus_procsss: process is
+  stimulus_process: process is
     variable fail : std_logic := '0';
   begin
     reset <= '1';
@@ -42,13 +42,13 @@ begin
     a <= '0';
     b <= '0';
     wait until rising_edge(clk);
-    if ((result /= '0') or (carry /= '0')) then
-      fail := '1';
-    end if;
     a <= '1';
     b <= '0';
+    if (carry /= '0') then
+      fail := '1';
+    end if;
     wait until rising_edge(clk);
-    if ((result /= '1') or (carry /= '0')) then
+    if ((result /= '0') or (carry /= '0')) then
       fail := '1';
     end if;
     a <= '0';
@@ -59,6 +59,10 @@ begin
     end if;
     a <= '1';
     b <= '1';
+    wait until rising_edge(clk);
+    if ((result /= '1') or (carry /= '1')) then
+      fail := '1';
+    end if;
     wait until rising_edge(clk);
     if ((result /= '0') or (carry /= '1')) then
       fail := '1';
