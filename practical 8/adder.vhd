@@ -27,11 +27,15 @@ architecture rlt of adder is
 
 begin
 
+  process(clk) is
+  begin
+    if rising_edge(clk) then
+      a_u <= unsigned(a_in);
+      b_u <= unsigned(b_in);
 
-  a_u <= unsigned(a_in);
-  b_u <= unsigned(b_in);
-
-  sum_u <= a_u + b_u;
+      sum_u <= a_u + b_u;
+    end if;
+  end process;
 
   result_out <= std_logic_vector(sum_u);
 
