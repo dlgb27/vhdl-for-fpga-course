@@ -15,7 +15,7 @@ end entity;
 
 architecture rlt of debounce is
 
-  signal sr   : std_logic_vector(5 downto 0) := (others => '0');
+  signal sr   : std_logic_vector(9 downto 0) := (others => '0');
 
 begin
 

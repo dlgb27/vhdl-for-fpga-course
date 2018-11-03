@@ -25,7 +25,7 @@ architecture rlt of fifo is
   COMPONENT fifo_generator_0
     PORT (
       clk : IN STD_LOGIC;
-      srst : IN STD_LOGIC;
+      rst : IN STD_LOGIC;
       din : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
       wr_en : IN STD_LOGIC;
       rd_en : IN STD_LOGIC;
@@ -55,7 +55,7 @@ begin
   fifo_inst : fifo_generator_0
   PORT MAP (
     clk => clk,
-    srst => reset_in,
+    rst => reset_in,
     din => d_in,
     wr_en => fifo_write,
     rd_en => fifo_read,
