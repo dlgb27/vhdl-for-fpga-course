@@ -138,30 +138,16 @@ class StreamCipher(object):
 
 if __name__ == "__main__":
 
-    import pickle
-
-    ############################################################################
-    # CHALLENGE CONFIGURATION
-
-    # read in the flag
-    with open('flag.txt', 'r') as f:
-        flag = f.read()
-
-    # read in the initial LFSR states
-    with open('initial_lfsr_states.bin', 'rb') as f:
-        initial_lfsr1_state = pickle.load(f)
-        initial_lfsr2_state = pickle.load(f)
-        initial_lfsr3_state = pickle.load(f)
+    # read in the plaintext
+    with open('plaintext.txt', 'r') as f:
+        plaintext = f.read()
 
     # Construct the LFSRs using their initial states and the specified
     # polynomials. The polynomial defines the tap bits used to calculate the new
     # bit to shift in each iteration.
-    lfsr1 = LFSR(initial_lfsr1_state, (4, 9, 10, 13))  # LFSR1 = 13 bits
-    lfsr2 = LFSR(initial_lfsr2_state, (3, 5, 7, 8))    # LFSR2 = 8 bits
-    lfsr3 = LFSR(initial_lfsr3_state, (1, 3, 4, 5))    # LFSR3 = 5 bits
-
-    # END CHALLENGE CONFIGURATION
-    ############################################################################
+    lfsr1 = LFSR([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], (4, 9, 10, 13))   # LFSR1 = 13 bits
+    lfsr2 = LFSR([0, 0, 0, 0, 0, 0, 0, 0], (3, 5, 7, 8))                    # LFSR2 = 8 bits
+    lfsr3 = LFSR([0, 0, 0, 0, 0], (1, 3, 4, 5))                             # LFSR3 = 5 bits
 
     # dump out the initial LFSR states and polynomials
     print("LFSR1")
@@ -182,17 +168,17 @@ if __name__ == "__main__":
     # encrypt the plaintext
     print("")
     print("Encrypting ..."),
-    encryptor = StreamCipher.encrypt(flag, Keystream(lfsr1, lfsr2, lfsr3))
+    encryptor = StreamCipher.encrypt(plaintext, Keystream(lfsr1, lfsr2, lfsr3))
     ciphertext = ''.join(itertools.imap(str, encryptor))
 
     # do a sanity check to ensure the recovered plaintext matches the original
     decryptor = StreamCipher.decrypt(ciphertext, Keystream(lfsr1, lfsr2, lfsr3))
-    plaintext = ''.join(decryptor)
-    if plaintext != flag:
+    plaintext_test = ''.join(decryptor)
+    if plaintext_test != plaintext:
         exit("error: recovered plaintext does not match original!")
 
     # if we round-tripped the plaintext successfully, write out the ciphertext
     with open('ciphertext.bits', 'wb') as f:
         f.write(ciphertext)
 
-    print("ciphertext written successfully!")
+    print("Ciphertext written successfully!")
