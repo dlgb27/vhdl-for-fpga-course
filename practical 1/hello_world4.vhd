@@ -17,7 +17,7 @@ architecture rlt of hello_world is
 
 begin
 
-  -- The LED's come on when their oposit switch is closed.
+  -- The LED's come on when their opposite switch is closed.
   leds(0) <= switches(1);
   leds(1) <= switches(0);
   
