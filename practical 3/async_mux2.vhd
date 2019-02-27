@@ -13,7 +13,7 @@ entity async_mux is
   );
 end entity;
 
-architecture rlt of async_mux is
+architecture rtl of async_mux is
 
 begin
 

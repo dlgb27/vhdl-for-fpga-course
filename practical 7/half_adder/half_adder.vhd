@@ -17,7 +17,7 @@ entity half_adder is
   );
 end entity;
 
-architecture rlt of half_adder is
+architecture rtl of half_adder is
 
 begin
 

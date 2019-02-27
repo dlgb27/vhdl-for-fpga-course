@@ -13,7 +13,7 @@ entity rom is
   );
 end entity;
 
-architecture rlt of rom is
+architecture rtl of rom is
 
   constant rom_addr_bits    : natural := 4;
   constant rom_depth        : natural := 2**rom_addr_bits;

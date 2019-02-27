@@ -15,7 +15,7 @@ entity toplevel is
   );
 end entity;
 
-architecture rlt of toplevel is
+architecture rtl of toplevel is
 
 begin
 

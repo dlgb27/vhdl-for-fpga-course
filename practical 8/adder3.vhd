@@ -20,7 +20,7 @@ entity adder is
   );
 end entity;
 
-architecture rlt of adder is
+architecture rtl of adder is
 
   signal carry    : std_logic_vector(bits downto 0);
 

@@ -15,7 +15,7 @@ entity flip_flop is
   );
 end entity;
 
-architecture rlt of flip_flop is
+architecture rtl of flip_flop is
 
   signal set, reset, clk  : std_logic;
   signal d, q_r           : std_logic;

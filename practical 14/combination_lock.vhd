@@ -16,7 +16,7 @@ entity combination_lock is
   );
 end entity;
 
-architecture rlt of combination_lock is
+architecture rtl of combination_lock is
 
   type state_t is (locked, code1, code2, code3, unlocked);
   signal state_r : state_t;

@@ -13,7 +13,7 @@ entity debounce is
   );
 end entity;
 
-architecture rlt of debounce is
+architecture rtl of debounce is
 
   signal count_u      : unsigned(16 downto 0);
   signal count_ur     : unsigned(15 downto 0);

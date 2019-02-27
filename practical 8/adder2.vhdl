@@ -20,7 +20,7 @@ entity adder is
   );
 end entity;
 
-architecture rlt of adder is
+architecture rtl of adder is
 
   signal a_u, b_u : unsigned(bits downto 0);
   signal sum_u    : unsigned(bits downto 0);

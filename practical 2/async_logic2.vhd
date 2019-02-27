@@ -13,7 +13,7 @@ entity async_logic is
   );
 end entity;
 
-architecture rlt of async_logic is
+architecture rtl of async_logic is
 
   signal a : std_logic;
   signal b : std_logic;

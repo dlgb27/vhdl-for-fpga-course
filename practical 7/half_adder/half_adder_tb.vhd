@@ -5,7 +5,7 @@ use ieee.numeric_std.all;
 entity half_adder_tb is
 end entity;
 
-architecture rlt of half_adder_tb is
+architecture rtl of half_adder_tb is
 
   constant clk_period : time := 10 ns;
 

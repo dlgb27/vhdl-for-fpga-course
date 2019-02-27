@@ -15,7 +15,7 @@ entity hello_world is
   );
 end entity;
 
-architecture rlt of hello_world is
+architecture rtl of hello_world is
 
 begin
 

@@ -17,7 +17,7 @@ entity counter is
   );
 end entity;
 
-architecture rlt of counter is
+architecture rtl of counter is
 
   signal counter_ur    : unsigned(bits-1 downto 0);
 

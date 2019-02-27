@@ -5,7 +5,7 @@ use ieee.numeric_std.all;
 entity example_tb is
 end entity;
 
-architecture rlt of example_tb is
+architecture rtl of example_tb is
 
   constant clk_period : time := 10 ns;
 

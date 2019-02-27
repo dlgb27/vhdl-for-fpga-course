@@ -23,7 +23,7 @@ entity ram is
   );
 end entity;
 
-architecture rlt of ram is
+architecture rtl of ram is
 
   type ram_t is array (0 to (2**a_bits)-1) of std_logic_vector(d_bits-1 downto 0);
   signal ram  : ram_t := (others => (others => '0'));

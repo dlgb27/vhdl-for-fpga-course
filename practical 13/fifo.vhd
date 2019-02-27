@@ -20,7 +20,7 @@ entity fifo is
   );
 end entity;
 
-architecture rlt of fifo is
+architecture rtl of fifo is
 
   COMPONENT fifo_generator_0
     PORT (

@@ -17,7 +17,7 @@ entity toplevel is
   );
 end entity;
 
-architecture rlt of toplevel is
+architecture rtl of toplevel is
 
   signal reset            : std_logic;
   signal d, q_r, q_rr     : std_logic;

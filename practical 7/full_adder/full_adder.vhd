@@ -18,7 +18,7 @@ entity full_adder is
   );
 end entity;
 
-architecture rlt of full_adder is
+architecture rtl of full_adder is
 
   signal a_xor_b      : std_logic;
 

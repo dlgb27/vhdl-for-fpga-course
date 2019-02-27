@@ -13,7 +13,7 @@ entity hello_process is
   );
 end entity;
 
-architecture rlt of hello_process is
+architecture rtl of hello_process is
 
 begin
 

@@ -20,7 +20,7 @@ entity multiplier is
   );
 end entity;
 
-architecture rlt of multiplier is
+architecture rtl of multiplier is
 
   signal a_reg1_r, a_reg2_r     : std_logic_vector(bits-1 downto 0);
   signal b_reg1_r, b_reg2_r     : std_logic_vector(bits-1 downto 0);

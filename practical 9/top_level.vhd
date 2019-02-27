@@ -15,7 +15,7 @@ entity toplevel is
   );
 end entity;
 
-architecture rlt of toplevel is
+architecture rtl of toplevel is
 
   signal pulse, led_r       : std_logic;
 

@@ -15,7 +15,7 @@ entity toplevel is
   );
 end entity;
 
-architecture rlt of toplevel is
+architecture rtl of toplevel is
 
   signal fifo_write, fifo_read    : std_logic;
 
