@@ -17,7 +17,7 @@ architecture rtl of hello_process is
 
 begin
 
-  -- In this example, the process does nothing for us. Might as well no be there!
+  -- In this example, the process does nothing for us. Might as well not be there!
   my_process : process(switches) is
   begin
 
