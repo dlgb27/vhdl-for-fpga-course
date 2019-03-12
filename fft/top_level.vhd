@@ -28,7 +28,7 @@ architecture rtl of toplevel is
   signal button_down_db_r      : std_logic;
 
   -- Initialising this to avoid having to press reset initially
-  signal fft_threshold         : unsigned(14 downto 0) := to_unsigned(THRESHOLD_DEFAULT, 15);
+  signal fft_threshold_ur      : unsigned(14 downto 0) := to_unsigned(THRESHOLD_DEFAULT, 15);
 
 begin
 
@@ -62,13 +62,13 @@ begin
       button_up_db_r   <= button_up_db;
       button_down_db_r <= button_down_db;
 
-      if button_up_db = '1' and button_up_db_r = '0' then
-        fft_threshold <= fft_threshold + THRESHOLD_STEP_SIZE;
-      elsif button_down_db = '1' and button_down_db_r = '0' then
-        fft_threshold <= fft_threshold - THRESHOLD_STEP_SIZE;
+      if ((button_up_db = '1') and (button_up_db_r = '0')) then
+        fft_threshold_ur <= fft_threshold_ur + THRESHOLD_STEP_SIZE;
+      elsif ((button_down_db = '1') and (button_down_db_r = '0')) then
+        fft_threshold_ur <= fft_threshold_ur - THRESHOLD_STEP_SIZE;
       end if;
-      if reset = '1' then
-        fft_threshold <= to_unsigned(THRESHOLD_DEFAULT, fft_threshold'length);
+      if (reset = '1') then
+        fft_threshold_ur <= to_unsigned(THRESHOLD_DEFAULT, fft_threshold_ur'length);
       end if;
     end if;
   end process;
@@ -76,13 +76,13 @@ begin
   fft_inst : entity work.fft_1bit
   port map
   (
-    clk             => clk,
+    clk                 => clk,
     --
-    real_samples_in => switches,
+    real_samples_in     => switches,
     --
-    power_threshold => std_logic_vector(fft_threshold),
+    power_threshold_in  => std_logic_vector(fft_threshold_ur),
     --
-    peaks_out       => leds
+    peaks_out           => leds
   );
 
 end architecture;
