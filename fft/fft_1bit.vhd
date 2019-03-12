@@ -74,8 +74,8 @@ signal fft_im_sq_r        : signed(fft_in_im_r'length*2-1 downto 0);
 signal fft_out_valid_rrr  : std_logic;
 signal fft_out_last_rrr   : std_logic;
 
-signal fft_re_sq_rr       : signed(fft_re_sq'high-1 downto 0);
-signal fft_im_sq_rr       : signed(fft_im_sq'high-1 downto 0);
+signal fft_re_sq_rr       : signed(fft_re_sq_r'high-1 downto 0);
+signal fft_im_sq_rr       : signed(fft_im_sq_r'high-1 downto 0);
 signal fft_out_valid_r4   : std_logic;
 signal fft_out_last_r4    : std_logic;
 
@@ -89,8 +89,8 @@ signal output_buf_r       : std_logic_vector(15 downto 0);
 signal output_buf_valid_r : std_logic;
 
 attribute USE_DSP : string;
-attribute USE_DSP of fft_re_sq : signal is "yes";
-attribute USE_DSP of fft_im_sq : signal is "yes";
+attribute USE_DSP of fft_re_sq_r : signal is "yes";
+attribute USE_DSP of fft_im_sq_r : signal is "yes";
 
 begin
 
