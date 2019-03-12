@@ -14,7 +14,7 @@ architecture rtl of adder_tb is
   signal clk            : std_logic;
 
   signal a, b           : std_logic_vector(bits-1 downto 0) := (others => '0');
-  signal result         : std_logic_vector(bits-1 downto 0);
+  signal result         : std_logic_vector(bits downto 0);
 
 begin
 

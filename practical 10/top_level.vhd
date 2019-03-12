@@ -17,7 +17,19 @@ end entity;
 
 architecture rtl of toplevel is
 
+  signal a_r, b_r : std_logic_vector(7 downto 0);
+  signal result   : std_logic_vector(15 downto 0);
 begin
+
+  io_proc : process(clk) is
+  begin
+    if rising_edge(clk) then
+      a_r <= switches(7 downto 0);
+      b_r <= switches(15 downto 8);
+
+      leds <= result;
+    end if;
+  end process;
 
   multiplier_inst : entity work.multiplier
   generic map
@@ -28,10 +40,10 @@ begin
   (
     clk         => clk,
     --
-    a_in        => switches(7 downto 0),
-    b_in        => switches(15 downto 8),
+    a_in        => a_r,
+    b_in        => b_r,
     --
-    result_out  => leds
+    result_out  => result
   );
 
 end architecture;

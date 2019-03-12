@@ -2,10 +2,10 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-entity example_tb is
+entity full_adder_tb is
 end entity;
 
-architecture rtl of example_tb is
+architecture rtl of full_adder_tb is
 
   constant clk_period : time := 10 ns;
 
