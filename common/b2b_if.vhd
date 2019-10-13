@@ -1,15 +1,15 @@
 library ieee;
 use ieee.std_logic_1164.all;
-use ieee.numeric_std.al;
+use ieee.numeric_std.all;
 
-entity b2b is
+entity b2b_if is
   generic
   (
     bits                    : natural
   );
   port
   (
-    clk_in		              : in  std_logic
+    clk_in		              : in  std_logic;
     --
     data_in                 : in  std_logic_vector(bits-1 downto 0);
     data_valid_in           : in  std_logic;
@@ -24,7 +24,7 @@ entity b2b is
   );
 end entity;
 
-architecture rtl of b2b is
+architecture rtl of b2b_if is
 
   type state_t is (idle, hold_data, hold_clock);
   signal state_r : state_t;
@@ -49,12 +49,14 @@ begin
   -- When new data is available, put the data on the data out pins and wait half a clock cycle.
   -- Then assert the clock and wait the other half.
   -- Then drop the clock and wait for more data to send.
-  fsm_proc : process(clk) is
+  fsm_proc : process(clk_in) is
   begin
-    if rising_edge(clk) then
+    if rising_edge(clk_in) then
 
       counter_ur <= counter_ur - 1;
       
+      ready_for_new_data_out  <= '0';
+
       case state_r is
         when idle =>
           ready_for_new_data_out  <= '1';
@@ -63,7 +65,7 @@ begin
 
           if (data_valid_in = '1') then
             DATA_PINS_OUT <= data_in;
-            state         <= hold_data;
+            state_r       <= hold_data;
           end if;
         when hold_data =>
           if (counter_ur = (counter_ur'range => '0')) then
@@ -81,25 +83,25 @@ begin
 
   -- Rx:
   -- Syncronise the input clock and data onto our local clock to avoid metastability.
-  syncronise_proc : process(clk) is
+  syncronise_proc : process(clk_in) is
   begin
-    if rising_edge(clk) then
+    if rising_edge(clk_in) then
       clk_pin_in_r    <= CLK_PIN_IN;
       clk_pin_in_rr   <= clk_pin_in_r;
 
       data_pins_in_r  <= DATA_PINS_IN;
-      data_pins_in_rr <= data_pins_in_r
+      data_pins_in_rr <= data_pins_in_r;
     end if;
   end process;
 
   -- Edge detect the input clock and assert the data out when we see the clock rise.
-  input_proc : process(clk) is
+  input_proc : process(clk_in) is
   begin
-    if rising_edge(clk) then
+    if rising_edge(clk_in) then
       clk_pin_in_rrr  <= clk_pin_in_rr;
 
       data_out_valid  <= '0'; 
-      if ((clk_pin_in_rrr = '1') and (clk_pin_in_rr = '0')) then
+      if ((clk_pin_in_rrr = '0') and (clk_pin_in_rr = '1')) then
         data_out        <= data_pins_in_rr;
         data_out_valid  <= '1';
       end if;
