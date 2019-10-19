@@ -16,23 +16,23 @@ entity adder is
     a_in        : in  std_logic_vector(bits-1 downto 0);
     b_in        : in  std_logic_vector(bits-1 downto 0);
     --
-    result_out  : out std_logic_vector(bits-1 downto 0)
+    result_out  : out std_logic_vector(bits downto 0)
   );
 end entity;
 
 architecture rtl of adder is
 
-  signal a_u, b_u : unsigned(bits-1 downto 0);
-  signal sum_u    : unsigned(bits-1 downto 0);
+  signal a_u, b_u : unsigned(bits downto 0);
+  signal sum_u    : unsigned(bits downto 0);
 
 begin
+
+  a_u <= '0' & unsigned(a_in);
+  b_u <= '0' & unsigned(b_in);
 
   process(clk) is
   begin
     if rising_edge(clk) then
-      a_u <= unsigned(a_in);
-      b_u <= unsigned(b_in);
-
       sum_u <= a_u + b_u;
     end if;
   end process;
