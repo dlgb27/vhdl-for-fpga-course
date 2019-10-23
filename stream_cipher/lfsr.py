@@ -48,4 +48,4 @@ print("  state     : {0}".format(lfsr.state))
 print("  polynomial: {0}".format(lfsr.polynomial))
 
 for i in range(32):
-    print lfsr.next()
+    print(lfsr.next())
