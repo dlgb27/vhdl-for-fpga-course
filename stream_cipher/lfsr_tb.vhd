@@ -9,10 +9,9 @@ architecture rtl of lfsr_tb is
 
   constant clk_period : time := 10 ns;
 
-  constant LENGTH1 : positive := 13;
-  constant FILL1   : std_logic_vector(LENGTH1-1 downto 0) := (LENGTH1-1 => '1', others => '0');
-  constant TAPS1   : std_logic_vector(LENGTH1-1 downto 0) := "1001100001000"; --(4, 9, 10, 13)
-
+  constant LENGTH1    : positive := 13;
+  constant FILL1      : std_logic_vector(LENGTH1-1 downto 0) := (LENGTH1-1 => '1', others => '0');
+  constant TAPS1      : std_logic_vector(LENGTH1-1 downto 0) := "1001100001000"; --(4, 9, 10, 13)
 
   signal clk          : std_logic;
   signal reset        : std_logic;

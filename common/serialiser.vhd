@@ -5,53 +5,53 @@ use ieee.numeric_std.all;
 entity serialiser is
   port
   (
-    clk            : in  std_logic;
+    clk               : in  std_logic;
     --  
-    data_in        : in  std_logic_vector(15 downto 0);
-    data_in_valid  : in  std_logic;
+    data_in           : in  std_logic_vector(15 downto 0);
+    data_valid_in     : in  std_logic;
     --
-    data_out         : out std_logic;
-    data_out_valid   : out std_logic;
-    data_out_first   : out std_logic
+    data_out          : out std_logic;
+    data_valid_out    : out std_logic;
+    data_first_out    : out std_logic
   );
 end entity;
 
 architecture rtl of serialiser is
 
-  signal counter_ur    : unsigned(3 downto 0);
+  signal counter_ur       : unsigned(3 downto 0);
 
-  signal latch_valid   : std_logic := '0';
-  signal latch_first   : std_logic := '0';
-  signal data_in_latch : std_logic_vector(data_in'range);
+  signal latch_valid_r    : std_logic := '0';
+  signal latch_first_r    : std_logic := '0';
+  signal data_in_latch_r  : std_logic_vector(data_in'range);
 
 begin
 
-  process(clk) is
+  parallel_to_serial_proc : process(clk) is
   begin
     if rising_edge(clk) then
-      if latch_valid = '1' then
-        counter_ur  <= counter_ur - 1;
-        latch_first <= '0';
-        if counter_ur = (counter_ur'range => '0') then
-          latch_valid <= '0';
+      if (latch_valid_r = '1') then
+        counter_ur    <= counter_ur - 1;
+        latch_first_r <= '0';
+        if (counter_ur = (counter_ur'range => '0')) then
+          latch_valid_r <= '0';
         end if;
       end if;
 
-      if data_in_valid = '1' then
-        data_in_latch <= data_in;
-        counter_ur    <= (others => '1');
-        latch_valid   <= '1';
-        latch_first   <= '1';
+      if (data_valid_in = '1') then
+        data_in_latch_r <= data_in;
+        counter_ur      <= (others => '1');
+        latch_valid_r   <= '1';
+        latch_first_r   <= '1';
       end if;
     end if;
   end process;
 
-  process(clk) is
+  output_proc : process(clk) is
   begin
     if rising_edge(clk) then
-      data_out_valid <= latch_valid;
-      data_out       <= data_in_latch(to_integer(counter_ur));
-      data_out_first <= latch_first;
+      data_valid_out <= latch_valid_r;
+      data_out       <= data_in_latch_r(to_integer(counter_ur));
+      data_first_out <= latch_first_r;
     end if;
   end process;
 

@@ -10,7 +10,7 @@ entity keystream is
     clk       : in  std_logic;
     reset     : in  std_logic;
     --
-    ce        : in  std_logic;
+    ce_in     : in  std_logic;
     bit_out   : out std_logic
   );
 end entity;
@@ -46,7 +46,7 @@ begin
     --
     fill    => FILL1,
     --
-    ce      => ce,
+    ce      => ce_in,
     bit_out => x
   );
 
@@ -63,7 +63,7 @@ begin
     --
     fill    => FILL2,
     --
-    ce      => ce,
+    ce      => ce_in,
     bit_out => y
   );
 
@@ -80,11 +80,11 @@ begin
     --
     fill    => FILL3,
     --
-    ce      => ce,
+    ce      => ce_in,
     bit_out => z
   );
 
-  process(clk) is
+  geffe_proc : process(clk) is
   begin
     if rising_edge(clk) then
       bit_out <= (x and y) xor ((not x) and z);

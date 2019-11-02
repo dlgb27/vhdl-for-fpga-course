@@ -12,10 +12,8 @@ entity toplevel is
     buttons   : in  std_logic_vector(4 downto 0);
     --
     leds      : out std_logic_vector(15 downto 0);
-    --
     -- 4 GPIO pins, on top row of PMOD JA. JA(0) is pin 1
     JA        : in  std_logic_vector(3 downto 0);
-    --
     -- 4 GPIO pins, on top row of PMOD JB. JB(0) is pin 1
     JB        : out std_logic_vector(3 downto 0)
   );
@@ -49,7 +47,7 @@ begin
       button0_db_r <= button0_db;
 
       start_transfer <= '0';
-      if button0_db = '1' and button0_db_r = '0' and b2b_ready = '1' then
+      if ((button0_db = '1') and (button0_db_r = '0') and (b2b_ready = '1')) then
         start_transfer <= '1';
       end if;
     end if;
@@ -102,10 +100,10 @@ begin
     data_out_valid => leds_buf_valid
   );
 
-  process(clk) is
+  led_proc : process(clk) is
   begin
     if rising_edge(clk) then
-      if leds_buf_valid = '1' then
+      if (leds_buf_valid = '1') then
         leds <= leds_buf;
       end if;
     end if;

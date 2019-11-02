@@ -5,23 +5,23 @@ use ieee.numeric_std.all;
 entity b2b_if is
   generic
   (
-    bits                    : natural
+    BITS                    : natural
   );
   port
   (
     clk_in                  : in  std_logic;
     reset_in                : in  std_logic;
     --
-    data_in                 : in  std_logic_vector(bits-1 downto 0);
+    data_in                 : in  std_logic_vector(BITS-1 downto 0);
     data_valid_in           : in  std_logic;
-    data_out                : out std_logic_vector(bits-1 downto 0);
+    data_out                : out std_logic_vector(BITS-1 downto 0);
     data_out_valid          : out std_logic;
     ready_for_new_data_out  : out std_logic;
     --
     CLK_PIN_OUT             : out std_logic;
-    DATA_PINS_OUT           : out std_logic_vector(bits-1 downto 0);
+    DATA_PINS_OUT           : out std_logic_vector(BITS-1 downto 0);
     CLK_PIN_IN              : in  std_logic;
-    DATA_PINS_IN            : in  std_logic_vector(bits-1 downto 0)
+    DATA_PINS_IN            : in  std_logic_vector(BITS-1 downto 0)
   );
 end entity;
 
@@ -41,7 +41,7 @@ architecture rtl of b2b_if is
 
   signal clk_pin_in_r, clk_pin_in_rr      : std_logic;
   signal clk_pin_in_rrr                   : std_logic;
-  signal data_pins_in_r, data_pins_in_rr  : std_logic_vector(bits-1 downto 0);
+  signal data_pins_in_r, data_pins_in_rr  : std_logic_vector(BITS-1 downto 0);
 
   attribute SHREG_EXTRACT : string;
   attribute SHREG_EXTRACT of clk_pin_in_r     : signal is "no";
@@ -65,17 +65,11 @@ END COMPONENT;
 
 begin
 
-  assert bits <= 8 report "bits must be less than or equal to 8" severity FAILURE;
+  assert BITS <= 8 report "BITS must be less than or equal to 8" severity FAILURE;
 
-  process(fifo_used, data_in, data_valid_in) is
-  begin
-    -- Signal ready if the fifo is less than half full
-    ready_for_new_data_out   <= not fifo_used(fifo_used'high);
-
-    fifo_in                  <= (others => '0');
-    fifo_in(bits-1 downto 0) <= data_in;
-    fifo_write               <= data_valid_in;
-  end process;
+  fifo_in(fifo_in'high downto BITS)   <= (others => '0');
+  fifo_in(BITS-1 downto 0)            <= data_in;
+  fifo_write                          <= data_valid_in;
 
   fifo_inst : b2b_if_fifo
   PORT MAP (
@@ -89,6 +83,8 @@ begin
     empty      => fifo_empty,
     data_count => fifo_used
   );
+
+  ready_for_new_data_out   <= not fifo_used(fifo_used'high);
 
   -- Tx:
   -- Control the output pins with a state machine.

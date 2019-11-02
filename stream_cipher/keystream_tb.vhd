@@ -7,16 +7,17 @@ end entity;
 
 architecture rtl of keystream_tb is
 
-  constant clk_period : time := 10 ns;
+  constant clk_period       : time := 10 ns;
 
-  signal clk          : std_logic;
-  signal reset        : std_logic;
+  signal clk                : std_logic;
+  signal reset              : std_logic;
 
-  signal ce           : std_logic;
-  signal keystream_bit_out : std_logic;
+  signal ce                 : std_logic;
+  signal keystream_bit_out  : std_logic;
 
-  signal data_pins    : std_logic_vector(1 downto 0);
-  signal clk_pins     : std_logic;
+  signal data_pins          : std_logic_vector(1 downto 0);
+  signal clk_pins           : std_logic;
+  
 begin
 
   clk_process: process is

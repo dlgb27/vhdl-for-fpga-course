@@ -5,17 +5,17 @@ use ieee.numeric_std.all;
 entity lfsr is
   generic
   (
-    length : natural;
-    taps   : std_logic_vector
+    LENGTH    : natural;
+    TAPS      : std_logic_vector
   );
   port
   (
     clk       : in  std_logic;
     reset     : in  std_logic;
     --  
-    fill      : in  std_logic_vector(length-1 downto 0);
+    fill_in   : in  std_logic_vector(LENGTH-1 downto 0);
     --
-    ce        : in  std_logic;
+    ce_in     : in  std_logic;
     bit_out   : out std_logic
   );
 end entity;
@@ -31,18 +31,18 @@ architecture rtl of lfsr is
     return ret;
   end function;
 
-  signal shift_reg : std_logic_vector(length-1 downto 0);
+  signal shift_reg : std_logic_vector(LENGTH-1 downto 0);
 
 begin
 
   lfsr_proc : process(clk) is
   begin
     if rising_edge(clk) then
-      if ce = '1' then
-        shift_reg <= shift_reg(shift_reg'high-1 downto 0) & xor_reduce(taps and shift_reg);
+      if (ce_in = '1') then
+        shift_reg <= shift_reg(shift_reg'high-1 downto 0) & xor_reduce(TAPS and shift_reg);
       end if;
-      if reset = '1' then
-        shift_reg <= fill;
+      if (reset = '1') then
+        shift_reg <= fill_in;
       end if;
     end if;
   end process;

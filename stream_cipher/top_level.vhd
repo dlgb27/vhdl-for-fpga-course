@@ -12,10 +12,8 @@ entity toplevel is
     buttons   : in  std_logic_vector(4 downto 0);
     --
     leds      : out std_logic_vector(15 downto 0);
-    --
     -- 4 GPIO pins, on top row of PMOD JA. JA(0) is pin 1
     JA        : in  std_logic_vector(3 downto 0);
-    --
     -- 4 GPIO pins, on top row of PMOD JB. JB(0) is pin 1
     JB        : out std_logic_vector(3 downto 0)
   );
@@ -51,16 +49,17 @@ begin
 
   debounce_i1 : entity work.debounce
   port map (clk => clk, bit_in => buttons(0), bit_out => button0_db);
+
   debounce_i2 : entity work.debounce
   port map (clk => clk, bit_in => buttons(1), bit_out => reset);
 
-  process(clk) is
+  start_proc : process(clk) is
   begin
     if rising_edge(clk) then
       button0_db_r <= button0_db;
 
       start_encryption <= '0';
-      if button0_db = '1' and button0_db_r = '0' and b2b_ready = '1' then
+      if ((button0_db = '1') and (button0_db_r = '0') and (b2b_ready = '1')) then
         start_encryption <= '1';
       end if;
     end if;
@@ -79,6 +78,7 @@ begin
     data_out_first   => serial_switch_first
   );
 
+  -- Encrypter
   stream_cipher_inst1 : entity work.stream_cipher
   port map
   (
@@ -118,6 +118,7 @@ begin
     DATA_PINS_IN(1)         => JA(2)
   );
 
+  -- Decrypter
   stream_cipher_inst2 : entity work.stream_cipher
   port map
   (
@@ -146,10 +147,10 @@ begin
     data_out_valid => leds_buf_valid
   );
 
-  process(clk) is
+  led_proc : process(clk) is
   begin
     if rising_edge(clk) then
-      if leds_buf_valid = '1' then
+      if (leds_buf_valid = '1') then
         leds <= leds_buf;
       end if;
     end if;

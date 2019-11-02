@@ -7,12 +7,12 @@ end entity;
 
 architecture rtl of end_to_end_tb is
 
-  constant clk_period      : time := 10 ns;
+  constant clk_period         : time := 10 ns;
 
-  signal clk               : std_logic;
-  signal reset             : std_logic;
-  signal switches          : std_logic_vector(15 downto 0);
-  signal leds              : std_logic_vector(15 downto 0);
+  signal clk                  : std_logic;
+  signal reset                : std_logic;
+  signal switches             : std_logic_vector(15 downto 0);
+  signal leds                 : std_logic_vector(15 downto 0);
 
   signal start_encryption     : std_logic;
 
@@ -34,7 +34,7 @@ architecture rtl of end_to_end_tb is
   signal leds_buf             : std_logic_vector(15 downto 0);
   signal leds_buf_valid       : std_logic;
 
-  signal pins : std_logic_vector(2 downto 0);
+  signal pins                 : std_logic_vector(2 downto 0);
 
 begin
 
@@ -144,10 +144,10 @@ begin
     data_out_valid => leds_buf_valid
   );
 
-  process(clk) is
+  led_proc : process(clk) is
   begin
     if rising_edge(clk) then
-      if leds_buf_valid = '1' then
+      if (leds_buf_valid = '1') then
         leds <= leds_buf;
       end if;
     end if;

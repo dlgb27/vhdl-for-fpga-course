@@ -20,11 +20,11 @@ end entity;
 
 architecture rtl of stream_cipher is
 
-  signal keystream_bit : std_logic;
+  signal keystream_bit    : std_logic;
 
-  signal data_in_valid_r : std_logic;
-  signal data_in_first_r : std_logic;
-  signal data_in_r       : std_logic;
+  signal data_in_valid_r  : std_logic;
+  signal data_in_first_r  : std_logic;
+  signal data_in_r        : std_logic;
 
 begin
 
@@ -38,7 +38,7 @@ begin
     bit_out   => keystream_bit
   );
   
-  process(clk) is
+  input_proc : process(clk) is
   begin
     if rising_edge(clk) then
       data_in_valid_r <= data_in_valid;
@@ -47,7 +47,7 @@ begin
     end if;
   end process;
 
-  process(clk) is
+  output_proc : process(clk) is
   begin
     if rising_edge(clk) then
       data_out       <= data_in_r xor keystream_bit;

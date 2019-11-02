@@ -7,22 +7,22 @@ end entity;
 
 architecture rtl of stream_cipher_tb is
 
-  constant clk_period      : time := 10 ns;
+  constant clk_period             : time := 10 ns;
 
-  signal clk               : std_logic;
-  signal reset             : std_logic;
+  signal clk                      : std_logic;
+  signal reset                    : std_logic;
 
-  signal bit_in_valid : std_logic;
-  signal bit_in_first : std_logic;
-  signal bit_in       : std_logic;
+  signal bit_in_valid             : std_logic;
+  signal bit_in_first             : std_logic;
+  signal bit_in                   : std_logic;
 
-  signal encrypted_bit_out_valid : std_logic;
-  signal encrypted_bit_out_first : std_logic;
-  signal encrypted_bit_out       : std_logic;
+  signal encrypted_bit_out_valid  : std_logic;
+  signal encrypted_bit_out_first  : std_logic;
+  signal encrypted_bit_out        : std_logic;
 
-  signal decrypted_bit_out_valid : std_logic;
-  signal decrypted_bit_out_first : std_logic;
-  signal decrypted_bit_out       : std_logic;
+  signal decrypted_bit_out_valid  : std_logic;
+  signal decrypted_bit_out_first  : std_logic;
+  signal decrypted_bit_out        : std_logic;
 
 begin
 
@@ -36,9 +36,9 @@ begin
 
   stimulus_procsss: process is
   begin
-    bit_in_first <= '0';
-    bit_in_valid <= '0';
-    bit_in <= '0';
+    bit_in_first  <= '0';
+    bit_in_valid  <= '0';
+    bit_in        <= '0';
 
     reset <= '1';
     wait for 100 ns;
@@ -47,11 +47,11 @@ begin
 
     wait for 200ns;
     wait until rising_edge(clk);
-    bit_in_first <= '1';
-    bit_in_valid <= '1';
-    bit_in <= '0';
+    bit_in_first  <= '1';
+    bit_in_valid  <= '1';
+    bit_in        <= '0';
     wait until rising_edge(clk);
-    bit_in_first <= '0';
+    bit_in_first  <= '0';
 
     for i in 1 to 31 loop
       bit_in_valid <= '0';
