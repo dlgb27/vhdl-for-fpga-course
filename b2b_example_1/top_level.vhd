@@ -2,18 +2,31 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-entity b2b_if_tb is
+entity toplevel is
+  port
+  (
+    clk       : in  std_logic;
+    --  
+    switches  : in  std_logic_vector(15 downto 0);
+    --
+    buttons   : in  std_logic_vector(4 downto 0);
+    --
+    leds      : out std_logic_vector(15 downto 0);
+    --
+    -- 4 GPIO pins, on top row of PMOD JA. JA(0) is pin 1
+    JA        : in  std_logic_vector(3 downto 0);
+    --
+    -- 4 GPIO pins, on top row of PMOD JB. JB(0) is pin 1
+    JB        : out std_logic_vector(3 downto 0)
+  );
 end entity;
 
-architecture rtl of b2b_if_tb is
+architecture rtl of toplevel is
 
-  constant clk_period : time := 10 ns;
-
-  signal clk          : std_logic;
-  signal reset        : std_logic;
+  signal button0_db           : std_logic;
+  signal button0_db_r         : std_logic;
 
   signal start_transfer       : std_logic;
-  signal switches             : std_logic_vector(15 downto 0);
 
   signal data_to_b2b          : std_logic_vector(1 downto 0);
   signal data_to_b2b_valid    : std_logic;
@@ -25,35 +38,21 @@ architecture rtl of b2b_if_tb is
   signal leds_buf             : std_logic_vector(15 downto 0);
   signal leds_buf_valid       : std_logic;
 
-  signal data_pins    : std_logic_vector(1 downto 0);
-  signal clk_pins     : std_logic;
 begin
 
-  clk_process: process is
+  debounce_i : entity work.debounce
+  port map (clk => clk, bit_in => buttons(0), bit_out => button0_db);
+
+  process(clk) is
   begin
-    wait for clk_period/2;
-    clk <= '1';
-    wait for clk_period/2;
-    clk <= '0';
-  end process;
+    if rising_edge(clk) then
+      button0_db_r <= button0_db;
 
-  stimulus_procsss: process is
-  begin
-    start_transfer <= '0';
-    reset <= '1';
-    wait for 100 ns;
-    wait until rising_edge(clk);
-    reset <= '0';
-
-
-    wait for 200ns;
-    wait until rising_edge(clk);
-    switches          <= "1101101101101101";
-    start_transfer  <= '1';
-    wait until rising_edge(clk);
-    start_transfer  <= '0';
-
-    wait;
+      start_transfer <= '0';
+      if button0_db = '1' and button0_db_r = '0' and b2b_ready = '1' then
+        start_transfer <= '1';
+      end if;
+    end if;
   end process;
 
   serialiser_inst : entity work.serialiser
@@ -66,8 +65,7 @@ begin
     --
     data_out         => data_to_b2b(0),
     data_out_valid   => data_to_b2b_valid,
-    data_out_first   => data_to_b2b(1),
-    data_out_request => b2b_ready
+    data_out_first   => data_to_b2b(1)
   );
 
   b2b_if_inst : entity work.b2b_if
@@ -77,7 +75,7 @@ begin
   )
   port map
   (
-    clk_in		              => clk,
+    clk_in                  => clk,
     --
     data_in                 => data_to_b2b,
     data_valid_in           => data_to_b2b_valid,
@@ -85,10 +83,10 @@ begin
     data_out_valid          => data_from_b2b_valid,
     ready_for_new_data_out  => b2b_ready,
     --
-    CLK_PIN_OUT             => clk_pins,
-    DATA_PINS_OUT           => data_pins,
-    CLK_PIN_IN              => clk_pins,
-    DATA_PINS_IN            => data_pins
+    CLK_PIN_OUT             => JB(0),
+    DATA_PINS_OUT           => JB(2 downto 1),
+    CLK_PIN_IN              => JA(0),
+    DATA_PINS_IN            => JA(2 downto 1)
   );
 
   paralleliser_inst : entity work.paralleliser
@@ -103,5 +101,14 @@ begin
     data_out       => leds_buf,
     data_out_valid => leds_buf_valid
   );
+
+  process(clk) is
+  begin
+    if rising_edge(clk) then
+      if leds_buf_valid = '1' then
+        leds <= leds_buf;
+      end if;
+    end if;
+  end process;
 
 end architecture;

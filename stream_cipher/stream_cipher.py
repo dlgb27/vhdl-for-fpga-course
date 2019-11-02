@@ -169,7 +169,7 @@ if __name__ == "__main__":
     print("")
     print("Encrypting ..."),
     encryptor = StreamCipher.encrypt(plaintext, Keystream(lfsr1, lfsr2, lfsr3))
-    ciphertext = ''.join(itertools.imap(str, encryptor))
+    ciphertext = ''.join(map(str, encryptor))
 
     # do a sanity check to ensure the recovered plaintext matches the original
     decryptor = StreamCipher.decrypt(ciphertext, Keystream(lfsr1, lfsr2, lfsr3))
@@ -178,7 +178,7 @@ if __name__ == "__main__":
         exit("error: recovered plaintext does not match original!")
 
     # if we round-tripped the plaintext successfully, write out the ciphertext
-    with open('ciphertext.bits', 'wb') as f:
+    with open('ciphertext.bits', 'w') as f:
         f.write(ciphertext)
 
     print("Ciphertext written successfully!")
