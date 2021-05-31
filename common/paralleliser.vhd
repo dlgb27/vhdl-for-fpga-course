@@ -12,7 +12,7 @@ entity paralleliser is
     data_frame_in   : in  std_logic;
     --
     data_out        : out std_logic_vector(15 downto 0);
-    data_out_valid  : out std_logic
+    data_valid_out  : out std_logic
   );
 end entity;
 
@@ -49,7 +49,7 @@ begin
   output_proc : process(clk) is
   begin
     if rising_edge(clk) then
-      data_out_valid <= data_buf_valid;
+      data_valid_out <= data_buf_valid_r;
       data_out       <= data_buf_r;
     end if;
   end process;

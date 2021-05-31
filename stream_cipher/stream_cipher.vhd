@@ -34,7 +34,7 @@ begin
     clk       => clk,
     reset     => reset,
     --
-    ce        => data_in_valid,
+    ce_in     => data_in_valid,
     bit_out   => keystream_bit
   );
   

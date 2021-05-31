@@ -71,11 +71,11 @@ begin
     clk              => clk,
     --  
     data_in          => switches,
-    data_in_valid    => start_encryption,
+    data_valid_in    => start_encryption,
     --
     data_out         => serial_switch,
-    data_out_valid   => serial_switch_valid,
-    data_out_first   => serial_switch_first
+    data_valid_out   => serial_switch_valid,
+    data_first_out   => serial_switch_first
   );
 
   -- Encrypter
@@ -140,11 +140,11 @@ begin
     clk            => clk,
     --  
     data_in        => decrypted_bit,
-    data_in_valid  => decrypted_bit_valid,
-    data_in_frame  => decrypted_bit_first,
+    data_valid_in  => decrypted_bit_valid,
+    data_frame_in  => decrypted_bit_first,
     --
     data_out       => leds_buf,
-    data_out_valid => leds_buf_valid
+    data_valid_out => leds_buf_valid
   );
 
   led_proc : process(clk) is
