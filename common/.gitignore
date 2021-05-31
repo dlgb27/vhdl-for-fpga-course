@@ -1,0 +1,9 @@
+*.dcp
+*.xdc
+*.xml
+*_netlist.v
+*_netlist.vhdl
+*_stub.v
+*_stub.vhdl
+hdl
+synth
