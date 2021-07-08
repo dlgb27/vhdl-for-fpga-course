@@ -11,7 +11,10 @@ entity toplevel is
     --
     buttons   : in  std_logic_vector(4 downto 0);
     --
-    leds      : out std_logic_vector(15 downto 0)
+    leds      : out std_logic_vector(15 downto 0);
+    --
+    seg       : out std_logic_vector(6 downto 0);
+    an        : out std_logic_vector(3 downto 0)
   );
 end entity;
 
@@ -20,6 +23,8 @@ architecture rtl of toplevel is
   signal fifo_write, fifo_read    : std_logic;
   signal btn2_dbn, btn2_dbn_r     : std_logic;
   signal btn3_dbn, btn3_dbn_r     : std_logic;
+  signal used : std_logic_vector(3 downto 0);
+  signal used_extended : std_logic_vector(15 downto 0);
 
 begin
 
@@ -42,20 +47,42 @@ begin
   
 
   fifo_i : entity work.fifo
-  port map 
+  generic map
+  (
+    a_bits      => 4,
+    d_bits      => 14
+  )
+  port map
   (
     clk         => clk,
     reset_in    => buttons(0),
     --
-    d_in(13 downto 0) => switches(13 downto 0),
-    d_in(15 downto 14) => "00",
+    d_in        => switches(13 downto 0),
     write_in    => fifo_write,
     full_out    => leds(14),
     --
-    q_out(13 downto 0)  => leds(13 downto 0),
-    q_out(15 downto 14) => open,
+    q_out       => leds(13 downto 0),
     read_in     => fifo_read,
-    empty_out   => leds(15)
+    empty_out   => leds(15),
+    used_out    => used
+  );
+
+  used_extended <= x"000" & used;
+
+  seven_seg : entity work.seven_segment_driver
+  generic map
+  (
+    clock_speed_hz => 100000000,
+    num_digits     => 4
+  )
+  port map 
+  (
+    clk         => clk,
+    --
+    value_in    => used_extended,
+    --
+    cathode_out => seg,
+    anode_out   => an
   );
 
 end architecture;

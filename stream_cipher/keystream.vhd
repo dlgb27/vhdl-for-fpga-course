@@ -44,9 +44,9 @@ begin
     clk     => clk,
     reset   => reset,
     --
-    fill    => FILL1,
+    fill_in => FILL1,
     --
-    ce      => ce_in,
+    ce_in   => ce_in,
     bit_out => x
   );
 
@@ -61,9 +61,9 @@ begin
     clk     => clk,
     reset   => reset,
     --
-    fill    => FILL2,
+    fill_in => FILL2,
     --
-    ce      => ce_in,
+    ce_in   => ce_in,
     bit_out => y
   );
 
@@ -78,9 +78,9 @@ begin
     clk     => clk,
     reset   => reset,
     --
-    fill    => FILL3,
+    fill_in => FILL3,
     --
-    ce      => ce_in,
+    ce_in   => ce_in,
     bit_out => z
   );
 
