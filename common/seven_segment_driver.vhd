@@ -12,12 +12,12 @@ entity seven_segment_driver is
   );
   port
   (
-    clk       : in  std_logic;
+    clk         : in  std_logic;
     --
-    value_in  : in  std_logic_vector(num_digits*4-1 downto 0);
+    value_in    : in  std_logic_vector(num_digits*4-1 downto 0);
     --
-    cathode   : out std_logic_vector(6 downto 0);
-    anode     : out std_logic_vector(num_digits-1 downto 0)
+    cathode_out : out std_logic_vector(6 downto 0);
+    anode_out   : out std_logic_vector(num_digits-1 downto 0)
   );
 end entity;
 
@@ -52,7 +52,7 @@ architecture rtl of seven_segment_driver is
 
   signal refresh_counter : unsigned(log_ceil(COUNTER_LIMIT)-1 downto 0);
   signal switch_anode    : std_logic;
-  signal anode_select    : std_logic_vector(anode'range) := "0111"; -- one-hot anode select (active low)
+  signal anode_select    : std_logic_vector(anode_out'range) := "0111"; -- one-hot anode select (active low)
 
 begin
 
@@ -85,7 +85,7 @@ begin
       for i in 0 to num_digits-1 loop
         if anode_select(i) = '0' then
           digit := value_in((i+1)*4 - 1 downto i*4);
-          cathode <= get_cathode_from_digit(digit);
+          cathode_out <= get_cathode_from_digit(digit);
         end if;
       end loop;
     end if;
@@ -94,7 +94,7 @@ begin
   output_anode : process(clk) is
   begin
     if rising_edge(clk) then
-      anode <= anode_select;
+      anode_out <= anode_select;
     end if;
   end process;
 

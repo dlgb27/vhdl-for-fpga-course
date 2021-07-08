@@ -2,8 +2,6 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-use work.functions.all;
-
 -- converts a binary value to decimal.
 -- Each set of four bits of the output vector will contain the value 0-9
 

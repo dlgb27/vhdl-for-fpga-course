@@ -26,27 +26,27 @@ end entity;
 
 architecture rtl of vga_timing is
 
-	-- constant declarations for VGA sync parameters
+  -- constant declarations for VGA sync parameters
   -- constant H_L_BORDER      : integer :=  48; -- horizontal left border
   constant H_L_BORDER      : integer :=  64; -- horizontal left border
-	constant H_R_BORDER      : integer :=  16; -- horizontal right border
-	constant H_RETRACE       : integer :=  96; -- horizontal retrace
-	constant H_MAX           : integer := X_RESOLUTION + H_L_BORDER + H_R_BORDER + H_RETRACE - 1;
-	constant START_H_RETRACE : integer := X_RESOLUTION + H_R_BORDER;
-	constant END_H_RETRACE   : integer := X_RESOLUTION + H_R_BORDER + H_RETRACE - 1;
+  constant H_R_BORDER      : integer :=  16; -- horizontal right border
+  constant H_RETRACE       : integer :=  96; -- horizontal retrace
+  constant H_MAX           : integer := X_RESOLUTION + H_L_BORDER + H_R_BORDER + H_RETRACE - 1;
+  constant START_H_RETRACE : integer := X_RESOLUTION + H_R_BORDER;
+  constant END_H_RETRACE   : integer := X_RESOLUTION + H_R_BORDER + H_RETRACE - 1;
 
-	constant V_T_BORDER      : integer :=  33; -- vertical top border
-	constant V_B_BORDER      : integer :=  33; -- vertical bottom border
-	constant V_RETRACE       : integer :=   2; -- vertical retrace
-	constant V_MAX           : integer := Y_RESOLUTION + V_T_BORDER + V_B_BORDER + V_RETRACE - 1;
+  constant V_T_BORDER      : integer :=  33; -- vertical top border
+  constant V_B_BORDER      : integer :=  33; -- vertical bottom border
+  constant V_RETRACE       : integer :=   2; -- vertical retrace
+  constant V_MAX           : integer := Y_RESOLUTION + V_T_BORDER + V_B_BORDER + V_RETRACE - 1;
   constant START_V_RETRACE : integer := Y_RESOLUTION + V_B_BORDER;
-	constant END_V_RETRACE   : integer := Y_RESOLUTION + V_B_BORDER + V_RETRACE - 1;
-	
-	-- mod-4 counter to generate 25 MHz pixel tick
-	signal pixel_reg  : unsigned(1 downto 0);
+  constant END_V_RETRACE   : integer := Y_RESOLUTION + V_B_BORDER + V_RETRACE - 1;
+  
+  -- mod-4 counter to generate 25 MHz pixel tick
+  signal pixel_reg  : unsigned(1 downto 0);
   signal pixel_tick : std_logic;
 
-	-- registers to keep track of current pixel location
+  -- registers to keep track of current pixel location
   signal h_count_reg : unsigned(log_ceil(H_MAX+1)-1 downto 0);
   signal v_count_reg : unsigned(log_ceil(V_MAX+1)-1 downto 0);
 

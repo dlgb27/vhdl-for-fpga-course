@@ -77,12 +77,12 @@ begin
   )
   port map 
   (
-    clk       => clk,
+    clk         => clk,
     --
-    value_in  => used_extended,
+    value_in    => used_extended,
     --
-    cathode   => seg,
-    anode     => an
+    cathode_out => seg,
+    anode_out   => an
   );
 
 end architecture;

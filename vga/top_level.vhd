@@ -158,12 +158,12 @@ begin
   )
   port map 
   (
-    clk       => clk,
+    clk         => clk,
     --
-    value_in  => scores,
+    value_in    => scores,
     --
-    cathode   => seg,
-    anode     => an
+    cathode_out => seg,
+    anode_out   => an
   );
 
 end architecture;
